@@ -57,6 +57,7 @@ class Minify
             $this->JSM(file_get_contents($this->getString_or_file()));
         } 
         if ($this->getExt() == "html") {
+            $this->isHTML(file_get_contents($this->getString_or_file()));
         }
     }
     function isStrings($content)

@@ -8,6 +8,6 @@ include __DIR__."/minify.php";
 
 use marko9827\minify\Minify as MinifyMinify;
 
-$minify = new MinifyMinify("./test/test.js"); // "body { display: flex; }");
+$minify = new MinifyMinify("./test/test.css"); // "body { display: flex; }");
 echo $minify;
 ?>
