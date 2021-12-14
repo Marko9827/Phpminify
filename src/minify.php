@@ -21,7 +21,11 @@ class Minify {
         } 
     }
       function fileScann(){
-        $ext = pathinfo($this->getString_or_file(), PATHINFO_EXTENSION);
+        $this->setExt(pathinfo($this->getString_or_file(), PATHINFO_EXTENSION));
+
+        if($this->getExt() == ".css"){
+            
+        }
     }
 
     /**
