@@ -10,7 +10,7 @@ Minify JS, CSS, HTML string or file.
 
 # Usage
 ```php 
- use marko9827/minify;
+ use marko9827\minify;
  
  $content = file_get_contents("$path/file.example"); // .example = .js/.css/.html
  // or
