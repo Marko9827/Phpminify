@@ -15,11 +15,17 @@ class Minify
     private $type = true, $valid = false, $ext = "", $string_or_file = "", $return = "";
     function __construct()
     {
+
     }
     function isCode($string_or_file)
     {
-        $this->setString_or_file($string_or_file);
         if (file_exists($string_or_file)) {
+            $this->setString_or_file($string_or_file);
+        } else if (!empty($string_or_file)) {
+            $this->setString_or_file($string_or_file);
+            $this->isStrings($this->getString_or_file());
+        } else {
+            $this->setReturn(false);
         }
         return $this->getReturn();
     }
@@ -31,9 +37,13 @@ class Minify
         if ($this->getExt() == "css") {
         }
         if ($this->getExt() == "js") {
+            $this->CSSM($this->getString_or_file());
         }
     }
+    function isStrings($content)
+    {
 
+    }
     function CSSM($content)
     {
         $this->setReturn(preg_replace('/(\/\*[\s\S]*?\*\/)|([\t\r\n])/', "", $content));
