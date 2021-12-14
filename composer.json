@@ -9,7 +9,7 @@
         }
     },
     "scripts": {
-        "dev-start":"php bin/console server:start"
+        "dev-start":"php ./vendor/bin/phpunit"
     },
     "authors": [
         {
@@ -23,6 +23,8 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "symfony/web-server-bundle": "^4.4"
+        "symfony/web-server-bundle": "^4.4",
+        "phpunit/phpunit": "^9.5",
+        "symfony/test-pack": "^1.0"
     }
 }
