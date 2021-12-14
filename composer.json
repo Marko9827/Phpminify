@@ -1,15 +1,7 @@
 {
     "name": "marko9827/phpminify",
     "description": "Minify JS, CSS, HTML string or file",
-    "type": "composer-plugin",
-    "require": {
-        "monolog/monolog": "1.0.*",
-        "jquery-form/form": "^4.3",
-        "symfony/serializer": "^5.4",
-        "php": "^7.4",
-        "composer-runtime-api": "^2.1"
-    },
-    
+    "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -19,8 +11,12 @@
     "authors": [
         {
             "name": "Marko Nikolic",
-            "email": "marko.supergun@gmail.com"
+            "email": "marko.supergun@gmail.com",
+            "homepage": "https://github.com/Marko9827"
         }
     ],
+    "require": {
+        "php": ">=4.0.0"
+    },
     "minimum-stability": "stable"
 }
