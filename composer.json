@@ -8,9 +8,6 @@
             "Marko9827\\Phpminify\\": "src/"
         }
     },
-    "scripts": {
-        "dev-start": "php ./vendor/bin/phpunit"
-    },
     "authors": [
         {
             "name": "Marko Nikolic",
@@ -18,10 +15,7 @@
             "homepage": "https://github.com/Marko9827"
         }
     ],
-    "repositories": {
-        "url": "https://github.com/Marko9827/Phpminify.git",
-        "type": "git"
-    },
+     
     "require": {
         "php": ">=4.0.0"
     },
