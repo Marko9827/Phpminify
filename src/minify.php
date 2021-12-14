@@ -1,6 +1,9 @@
 <?php
 
 namespace marko9827\minify;
+
+use Exception; 
+
 /*
  * Minify Class
  * @author Marko Nikolić <marko.supergun@gmail.com>
@@ -10,15 +13,22 @@ namespace marko9827\minify;
  * @version 1.0.0
  */
 
-class Minify
+class Minify  
 {
     private $type = true, $valid = false, $ext = "", $string_or_file = "", $return = "";
-    function __construct()
+    public function __construct($str)
     {
-
+       return $this->isCode($str);
     }
-    function isCode($string_or_file)
+    private  function isCode($string_or_file)
     {
+        try {
+            if (ini_get('zlib.output_compression')) {
+                ini_set("zlib.output_compression", 1);
+                ini_set("zlib.output_compression_level", "9");
+            }
+        } catch (Exception $e) {
+        }
         if (file_exists($string_or_file)) {
             $this->setString_or_file($string_or_file);
         } else if (!empty($string_or_file)) {
@@ -30,7 +40,7 @@ class Minify
         return $this->getReturn();
     }
 
-    function fileScann()
+    private function fileScann()
     {
         $this->setExt(pathinfo($this->getString_or_file(), PATHINFO_EXTENSION));
 
@@ -39,12 +49,42 @@ class Minify
         if ($this->getExt() == "js") {
             $this->CSSM($this->getString_or_file());
         }
+        if ($this->getExt() == "html") {
+        }
     }
-    function isStrings($content)
+    private function isStrings($content)
     {
-
     }
-    function CSSM($content)
+    private function isHTML($content)
+    {
+        return preg_match('/<(\/*?)(?!(em|p|br\s*\/|strong))\w+?.+?>/', $content) ? true : false;
+    }
+    private function HTMLM($buffer)
+    {
+        if ($this->isHTML($buffer)) {
+            $pattern = "/<script[^>]*>(.*?)<\/script>/is";
+            preg_match_all($pattern, $buffer, $matches, PREG_SET_ORDER, 0);
+            foreach ($matches as $match) {
+                $pattern = "/(<script[^>]*>)(" . preg_quote($match[1], '/') . ")(<\/script>)/is";
+                $compress = $this->JSM($match[1]);
+                $buffer = preg_replace($pattern, '$1' . $compress . '$3', $buffer);
+            }
+            $pattern = "/<style[^>]*>(.*?)<\/style>/is";
+            preg_match_all($pattern, $buffer, $matches, PREG_SET_ORDER, 0);
+            foreach ($matches as $match) {
+                $pattern = "/(<style[^>]*>)(" . preg_quote($match[1], '/') . ")(<\/style>)/is";
+                $compress = $this->CSSM($match[1]);
+                $buffer = preg_replace($pattern, '$1' . $compress . '$3', $buffer);
+            }
+            $buffer = preg_replace(array('/<!--[^\[](.*)[^\]]-->/Uuis', "/[[:blank:]]+/u", '/\s+/u'), array('', ' ', ' '), str_replace(array("\n", "\r", "\t"), '', $buffer));
+        }
+        return $buffer;
+    }
+    private function JSM($content)
+    {
+        return str_replace(array("\n", "\r", "\t"), '', preg_replace(array('#\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$#m', '/\s+/'), array('', ' '), $content));
+    }
+    private function CSSM($content)
     {
         $this->setReturn(preg_replace('/(\/\*[\s\S]*?\*\/)|([\t\r\n])/', "", $content));
     }

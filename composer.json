@@ -9,7 +9,7 @@
         }
     },
     "scripts": {
-        "dev-start":"php ./vendor/bin/phpunit"
+        "dev-start": "php ./vendor/bin/phpunit"
     },
     "authors": [
         {
@@ -18,6 +18,10 @@
             "homepage": "https://github.com/Marko9827"
         }
     ],
+    "repositories": {
+        "url": "https://github.com/Marko9827/Phpminify.git",
+        "type": "git"
+    },
     "require": {
         "php": ">=4.0.0"
     },
