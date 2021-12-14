@@ -2,7 +2,7 @@
 
 namespace marko9827\minify;
 
-use Exception; 
+use Exception;
 
 /*
  * Minify Class
@@ -13,15 +13,21 @@ use Exception;
  * @version 1.0.0
  */
 
-class Minify  
+class Minify
 {
     private $type = true, $valid = false, $ext = "", $string_or_file = "", $return = "";
     public function __construct($str)
     {
-       return $this->isCode($str);
+        $this->setString_or_file($str);
     }
-    private  function isCode($string_or_file)
+    public function __toString()
     {
+
+        return $this->isCode();
+    }
+    function isCode()
+    {
+        $string_or_file = $this->getString_or_file();
         try {
             if (ini_get('zlib.output_compression')) {
                 ini_set("zlib.output_compression", 1);
@@ -30,9 +36,9 @@ class Minify
         } catch (Exception $e) {
         }
         if (file_exists($string_or_file)) {
-            $this->setString_or_file($string_or_file);
-        } else if (!empty($string_or_file)) {
-            $this->setString_or_file($string_or_file);
+            header("content-type: text/plain"); 
+            $this->fileScann();
+        } else if (!empty($string_or_file)) { 
             $this->isStrings($this->getString_or_file());
         } else {
             $this->setReturn(false);
@@ -40,26 +46,27 @@ class Minify
         return $this->getReturn();
     }
 
-    private function fileScann()
+    function fileScann()
     {
         $this->setExt(pathinfo($this->getString_or_file(), PATHINFO_EXTENSION));
 
         if ($this->getExt() == "css") {
+            $this->CSSM(file_get_contents($this->getString_or_file()));
         }
         if ($this->getExt() == "js") {
-            $this->CSSM($this->getString_or_file());
-        }
+            $this->JSM(file_get_contents($this->getString_or_file()));
+        } 
         if ($this->getExt() == "html") {
         }
     }
-    private function isStrings($content)
+    function isStrings($content)
     {
     }
-    private function isHTML($content)
+    function isHTML($content)
     {
         return preg_match('/<(\/*?)(?!(em|p|br\s*\/|strong))\w+?.+?>/', $content) ? true : false;
     }
-    private function HTMLM($buffer)
+    function HTMLM($buffer)
     {
         if ($this->isHTML($buffer)) {
             $pattern = "/<script[^>]*>(.*?)<\/script>/is";
@@ -80,11 +87,11 @@ class Minify
         }
         return $buffer;
     }
-    private function JSM($content)
+    function JSM($content)
     {
-        return str_replace(array("\n", "\r", "\t"), '', preg_replace(array('#\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$#m', '/\s+/'), array('', ' '), $content));
+        $this->setReturn(str_replace(array("\n", "\r", "\t"), '', preg_replace(array('#\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$#m', '/\s+/'), array('', ' '), $content)));
     }
-    private function CSSM($content)
+    function CSSM($content)
     {
         $this->setReturn(preg_replace('/(\/\*[\s\S]*?\*\/)|([\t\r\n])/', "", $content));
     }

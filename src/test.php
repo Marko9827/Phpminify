@@ -1,17 +1,13 @@
-<?php 
+<?php
 
-include "./vendor/autoload.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-use marko9827\minify;
- 
- $content = file_get_contents("$path/file.example"); // .example = .js/.css/.html
- // or
- $content = "var a = 0;  return a + 2;"; //js example
- $content = "body { display: flex; }"; // css example
- $content = "... <body> <div id='example_div'><p>Html Example</p></div>  ..."; // html example
+include __DIR__."/minify.php"; 
 
- $minify = new Minify($content);
- echo $minify;
- 
+use marko9827\minify\Minify as MinifyMinify;
 
+$minify = new MinifyMinify("./test/test.js"); // "body { display: flex; }");
+echo $minify;
 ?>
