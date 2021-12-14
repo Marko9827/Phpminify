@@ -10,12 +10,98 @@ namespace marko9827\minify;
  * @version 1.0.0
  */
 class Minify {
+    private $type = true, $valid = false, $ext = "", $string_or_file = "";
     function __construct() {
-
 
     }
     function isCode($string_or_file){
-        if(file_exists($string_or_file)){}
+        $this->setString_or_file($string_or_file);
+        if(file_exists($string_or_file)){
+
+        } 
+    }
+      function fileScann(){
+        $ext = pathinfo($this->getString_or_file(), PATHINFO_EXTENSION);
+    }
+
+    /**
+     * Get the value of valid
+     */ 
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * Set the value of valid
+     *
+     * @return  self
+     */ 
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of string_or_file
+     */ 
+    public function getString_or_file()
+    {
+        return $this->string_or_file;
+    }
+
+    /**
+     * Set the value of string_or_file
+     *
+     * @return  self
+     */ 
+    public function setString_or_file($string_or_file)
+    {
+        $this->string_or_file = $string_or_file;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ext
+     */ 
+    public function getExt()
+    {
+        return $this->ext;
+    }
+
+    /**
+     * Set the value of ext
+     *
+     * @return  self
+     */ 
+    public function setExt($ext)
+    {
+        $this->ext = $ext;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of type
+     */ 
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @return  self
+     */ 
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }
 
