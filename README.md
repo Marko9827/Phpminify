@@ -2,6 +2,10 @@
 
 Minify JS, CSS, HTML string or file.
 
+[![CI](https://github.com/Marko9827/Phpminify/actions/workflows/blank.yml/badge.svg?branch=main)](https://github.com/Marko9827/Phpminify/actions/workflows/blank.yml)
+
+[![PHP Composer](https://github.com/Marko9827/Phpminify/actions/workflows/php.yml/badge.svg)](https://github.com/Marko9827/Phpminify/actions/workflows/php.yml)
+
 > Very simple. Use this code.
 # Composer
 1. Install composer
