@@ -4,6 +4,9 @@
     "type": "library",
     "license": "MIT",
     "autoload": {
+        "psr-0": {
+            "Monolog": "src"
+        },
         "psr-4": {
             "Marko9827\\Phpminify\\": "src/"
         }
@@ -16,7 +19,7 @@
         }
     ],
     "require": {
-        "php": ">=4.0.0"
+        "php": ">=8.0.0"
     },
     "minimum-stability": "stable",
     "require-dev": {
